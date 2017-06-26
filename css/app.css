@@ -1,0 +1,6 @@
+.fl {float:left!important;}
+.clf {clear: both;}
+
+ .css-form input.ng-invalid.ng-touched, email.ng-invalid.ng-touched, select.ng-invalid.ng-touched  {
+    background-color: #FFEFED;
+  }

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>App Gestor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <script src="js/libs/angular.min.js"></script>
+  <script src="js/libs/angular-locale_pt-br.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/appController.js"></script>
+</head>
+
+<body>
+
+  <div class="w3-margin" ng-app="webApp" ng-controller="mainController">
+    <!-- menu container ini -->
+    <div class="w3-bar w3-teal">
+      <a href="#" ng-click="selMenuClick('home')" class="w3-bar-item w3-button">Home</a>
+      <a href="#" ng-click="selMenuClick('pesquisar')" class="w3-bar-item w3-button w3-hide-small">Pesquisar</a>
+      <a href="#" ng-click="selMenuClick('cadastrar')" class="w3-bar-item w3-button w3-hide-small">Cadastrar</a>
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+    </div>
+
+    <div id="mobile-menu" class="w3-bar-block w3-teal w3-hide w3-hide-large w3-hide-medium">
+      <a href="#" ng-click="selMenuClick('pesquisar')" class="w3-bar-item w3-button">Pesquisar</a>
+      <a href="#" ng-click="selMenuClick('cadastrar')" class="w3-bar-item w3-button">Cadastrar</a>
+    </div>
+    <!-- menu container end -->
+
+    <div ng-controller="principalController" ng-show="indexMenu == 'home'">
+      <div class="w3-container w3-light-gray">
+        <h1>Home</h1>
+        <p>Você está na página principal, utilize uma das opções para começar.</p>
+      </div>
+
+      <div class="w3-panel w3-blue w3-display-container w3-margin w3-round-large">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue w3-large w3-display-topright w3-round-large">×</span>
+        <h3>Ajuda</h3>
+        <p>Você pode começar cadastrando um novo cliente, ou pesquisando um cliente existente.</p>
+      </div>
+
+      <div class="w3-panel w3-white w3-display-container w3-margin w3-center" style="width:100%">
+
+
+        <div class="w3-half w3-margin fl" style="width:30%">
+          <div class="w3-button w3-white w3-ripple" ng-click="selMenuClick('pesquisar')" style="margin:0;padding:0">
+            <img src="imgs/img_pesquisar.png" style="width:50%">
+            <p class="w3-hide-small">Pesquisar um cliente</p>
+          </div>
+        </div>
+
+        <div class="w3-half w3-margin fl" style="width:30%">
+          <div class="w3-button w3-white w3-ripple" ng-click="selMenuClick('cadastrar')" style="margin:0;padding:0">
+            <img src="imgs/img_cadastrar.png" style="width:50%;">
+            <p class="w3-hide-small">Cadastar um cliente</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div ng-controller="pesquisarController" ng-show="indexMenu == 'pesquisar'">
+      <div class="w3-container w3-light-gray">
+        <h1>Pesquisar</h1>
+        <p>Você esta em pesquisa, utilize um dos critérios de pesquisa para encontrar um ou mais clientes.</p>
+      </div>
+      <div class="w3-panel w3-blue w3-display-container w3-margin w3-round-large">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue w3-large w3-display-topright w3-round-large">×</span>
+        <h3>Ajuda</h3>
+        <p>Você pode começar inserindo os dados de busca que você deseja para encontrar um ou mais clientes.</p>
+      </div>
+
+      <div class="w3-container  w3-margin w3-margin-right">
+
+
+        <input class="w3-input w3-border" ng-model="searchValue" placeholder="Procure por um valor..." type="text" id="searchName" name="searchName" />
+        <br />
+        
+        <table class="w3-table-all w3-card-4  w3-margin-right">
+          <tr>
+            <th>Editar</th>
+            <th>Nome</th>
+            <th>Sexo</th>
+            <th>E-mail</th>
+          </tr>
+          <tr ng-repeat="cliente in clientes | filter:searchValue">
+            <td>
+            <button class="w3-btn w3-ripple" 
+            ng-click="editarCliente(clientes.indexOf(cliente))">&#9998; Editar</button>
+            </td>
+            <td>{{cliente.nome}}</td>
+            <td>{{cliente.sexo}}</td>
+            <td>{{cliente.email}}</td>
+          </tr>
+        </table>
+
+
+      </div>
+
+
+    </div>
+
+    <div ng-controller="cadastrarController" ng-show="indexMenu == 'cadastrar'">
+      <div class="w3-container w3-light-gray">
+        <h1>Cadastrar</h1>
+        <p>Você está em cadastro de clientes, preencha os dados do formulário para cadastrar.</p>
+      </div>
+
+      <div class="w3-panel w3-blue w3-display-container w3-margin w3-round-large">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue w3-large w3-display-topright w3-round-large">×</span>
+        <h3>Ajuda</h3>
+        <p>Para cadastar um cliente, você deve preencher todos os campos obrigatórios e depois utilizar o botão "gravar" para
+          cadastar um novo cliente.</p>
+      </div>
+
+      <div class="w3-container w3-teal w3-margin">
+        <h2>Cadastro de cliente</h2>
+      </div>
+      <form name="cadastroForm" novalidate class="w3-container w3-card-4 w3-margin css-form">
+        <br />
+        <div ng-show="!showSucess && ((!cadastroForm.nome.$valid && cadastroForm.nome.$touched) 
+        || (!cadastroForm.email.$valid  && cadastroForm.email.$touched) 
+        || (!cadastroForm.cboSexoSelected.$valid  && cadastroForm.cboSexoSelected.$touched))" class="w3-panel w3-red w3-display-container  w3-round-large">
+          <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright w3-round-large">×</span>
+          <h3>Erro</h3>
+          <p>Informe o valor do campo em destaque </p>
+        </div>
+
+        <div ng-show="showSucess" class="w3-panel w3-green w3-display-container w3-margin w3-round-large">
+          <span onclick="this.parentElement.style.display='none'" class="w3-button w3-green w3-large w3-display-topright w3-round-large">×</span>
+          <h3>Sucesso</h3>
+          <p>Seus dados foram gravados com sucesso!</p>
+        </div>
+
+        <p>
+          <label class="w3-text-grey">*Nome</label>
+          <input class="w3-input w3-border" ng-focus="hideStatus()" type="text" id="nome" name="nome"  ng-model="cliente.nome" value="{{cliente.nome}}"  required
+          />
+
+        </p>
+        <p>
+          <label class="w3-text-grey">*E-mail</label>
+          <input class="w3-input w3-border" ng-focus="hideStatus()" type="email" id="email" name="email" value="{{cliente.email}}"  ng-model="cliente.email" required
+          />
+        </p>
+        <p>
+          <label class="w3-text-grey">Endereço</label>
+          <textarea class="w3-input w3-border" ng-focus="hideStatus()" ng-model="cliente.endereco"  style="resize:none">{{cliente.endereco}}</textarea>
+        </p>
+        <p>
+          <label class="w3-text-grey fl">*Sexo</label><br />
+          <select id="cboSexoSelected" name="cboSexoSelected" ng-focus="hideStatus()" class="w3-input w3-border fl w3-margin-right"
+            style="width:200px" ng-model="cliente.sexo" required ng-options="sex for sex in sexo">
+          </select>
+          <span ng-show="cliente.sexo == 'masculino'">&#9792;</span>
+          <span ng-show="cliente.sexo == 'feminino'">&#9794;</span>
+          <span ng-show="cliente.sexo == 'outros'">&#9893;</span>
+        </p>
+        <br>
+        <div class="w3-row">
+        </div>
+        <p><button type="button" ng-disabled="cadastroForm.$invalid" ng-click="gravar(cliente)" class="w3-btn w3-padding w3-teal"
+            style="width:120px">Gravar &nbsp; ❯</button></p>
+      </form>
+
+    </div>
+
+
+
+    <div class="w3-container w3-teal">
+      <p>App para gerenciamento de clientes</p>
+    </div>
+  </div>
+</body>
+<script src="js/menu.js"></script>
+<link rel="stylesheet" href="css/app.css" />
+
+</html>
