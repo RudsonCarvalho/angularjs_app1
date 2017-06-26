@@ -36,13 +36,13 @@
         <p>Você está na página principal, utilize uma das opções para começar.</p>
       </div>
 
-      <div class="w3-panel w3-blue w3-display-container w3-margin w3-round-large">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue w3-large w3-display-topright w3-round-large">×</span>
+      <div class="w3-panel w3-light-blue w3-display-container w3-margin w3-round-large">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-light-blue w3-large w3-display-topright w3-round-large">×</span>
         <h3>Ajuda</h3>
         <p>Você pode começar cadastrando um novo cliente, ou pesquisando um cliente existente.</p>
       </div>
 
-      <div class="w3-panel w3-white w3-display-container w3-margin w3-center" style="width:100%">
+      <div class="w3-panel w3-white w3-display-container w3-margin w3-center w3-animate-opacity" style="width:100%">
 
 
         <div class="w3-half w3-margin fl" style="width:30%">
@@ -68,8 +68,8 @@
         <h1>Pesquisar</h1>
         <p>Você esta em pesquisa, utilize um dos critérios de pesquisa para encontrar um ou mais clientes.</p>
       </div>
-      <div class="w3-panel w3-blue w3-display-container w3-margin w3-round-large">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue w3-large w3-display-topright w3-round-large">×</span>
+      <div class="w3-panel w3-light-blue w3-display-container w3-margin w3-round-large">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-light-blue w3-large w3-display-topright w3-round-large">×</span>
         <h3>Ajuda</h3>
         <p>Você pode começar inserindo os dados de busca que você deseja para encontrar um ou mais clientes.</p>
       </div>
@@ -80,7 +80,7 @@
         <input class="w3-input w3-border" ng-model="searchValue" placeholder="Procure por um valor..." type="text" id="searchName" name="searchName" />
         <br />
         
-        <table class="w3-table-all w3-card-4  w3-margin-right">
+        <table class="w3-table-all w3-card-4  w3-margin-right w3-animate-zoom">
           <tr>
             <th>Editar</th>
             <th>Nome</th>
@@ -97,7 +97,7 @@
             <td>{{cliente.email}}</td>
           </tr>
         </table>
-
+        <br />
 
       </div>
 
@@ -110,8 +110,8 @@
         <p>Você está em cadastro de clientes, preencha os dados do formulário para cadastrar.</p>
       </div>
 
-      <div class="w3-panel w3-blue w3-display-container w3-margin w3-round-large">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue w3-large w3-display-topright w3-round-large">×</span>
+      <div class="w3-panel w3-light-blue w3-display-container w3-margin w3-round-large">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-light-blue w3-large w3-display-topright w3-round-large">×</span>
         <h3>Ajuda</h3>
         <p>Para cadastar um cliente, você deve preencher todos os campos obrigatórios e depois utilizar o botão "gravar" para
           cadastar um novo cliente.</p>
@@ -120,17 +120,17 @@
       <div class="w3-container w3-teal w3-margin">
         <h2>Cadastro de cliente</h2>
       </div>
-      <form name="cadastroForm" novalidate class="w3-container w3-card-4 w3-margin css-form">
+      <form name="cadastroForm" novalidate class="w3-container w3-card-4 w3-margin css-form w3-animate-opacity">
         <br />
         <div ng-show="!showSucess && ((!cadastroForm.nome.$valid && cadastroForm.nome.$touched) 
         || (!cadastroForm.email.$valid  && cadastroForm.email.$touched) 
-        || (!cadastroForm.cboSexoSelected.$valid  && cadastroForm.cboSexoSelected.$touched))" class="w3-panel w3-red w3-display-container  w3-round-large">
+        || (!cadastroForm.cboSexoSelected.$valid  && cadastroForm.cboSexoSelected.$touched))" class="w3-panel w3-red w3-display-container  w3-round-large w3-animate-opacity">
           <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright w3-round-large">×</span>
           <h3>Erro</h3>
           <p>Informe o valor do campo em destaque </p>
         </div>
 
-        <div ng-show="showSucess" class="w3-panel w3-green w3-display-container w3-margin w3-round-large">
+        <div ng-show="showSucess" class="w3-panel w3-green w3-display-container w3-margin w3-round-large w3-animate-opacity">
           <span onclick="this.parentElement.style.display='none'" class="w3-button w3-green w3-large w3-display-topright w3-round-large">×</span>
           <h3>Sucesso</h3>
           <p>Seus dados foram gravados com sucesso!</p>
